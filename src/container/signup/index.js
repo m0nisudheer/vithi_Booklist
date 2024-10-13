@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../../../input.css"
 
 const SignUp = () => {
   const router = useRouter();
@@ -119,15 +120,13 @@ const SignUp = () => {
   });
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900">
-      <div className="w-full max-w-sm p-4 bg-gray-800 shadow-lg rounded-lg border border-red-500">
-        <h2 className="text-2xl font-semibold text-center mb-4 text-red-500">
-          Sign Up
-        </h2>
+    <div className="form-container">
+      <div className="form-wrapper">
+        <h2 className="form-heading">Sign Up</h2>
 
         <form onSubmit={formik.handleSubmit} autoComplete="off">
           <div className="mb-3">
-            <label htmlFor="email" className="block font-bold text-white">
+            <label htmlFor="email" className="form-label">
               Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -137,7 +136,7 @@ const SignUp = () => {
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className={`w-full px-4 py-1.5 mt-1 bg-gray-700 text-gray-100 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 ${
+              className={`input-field ${
                 formik.touched.email && formik.errors.email
                   ? "border-red-500"
                   : "border-gray-600"
@@ -145,12 +144,12 @@ const SignUp = () => {
               placeholder="Enter your email"
             />
             {formik.touched.email && formik.errors.email && (
-              <div className="text-red-500 mt-1">{formik.errors.email}</div>
+              <div className="error-text">{formik.errors.email}</div>
             )}
           </div>
 
           <div className="mb-3">
-            <label htmlFor="userName" className="block font-bold text-white">
+            <label htmlFor="userName" className="form-label">
               Username <span className="text-red-500">*</span>
             </label>
             <input
@@ -160,7 +159,7 @@ const SignUp = () => {
               value={formik.values.userName}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className={`w-full px-4 py-1.5 mt-1 bg-gray-700 text-gray-100 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 ${
+              className={`input-field ${
                 formik.touched.userName && formik.errors.userName
                   ? "border-red-500"
                   : "border-gray-600"
@@ -168,12 +167,12 @@ const SignUp = () => {
               placeholder="Enter your username"
             />
             {formik.touched.userName && formik.errors.userName && (
-              <div className="text-red-500 mt-1">{formik.errors.userName}</div>
+              <div className="error-text">{formik.errors.userName}</div>
             )}
           </div>
 
           <div className="mb-3">
-            <label htmlFor="password" className="block font-bold text-white">
+            <label htmlFor="password" className="form-label">
               Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -183,7 +182,7 @@ const SignUp = () => {
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className={`w-full px-4 py-1.5 mt-1 bg-gray-700 text-gray-100 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 ${
+              className={`input-field ${
                 formik.touched.password && formik.errors.password
                   ? "border-red-500"
                   : "border-gray-600"
@@ -191,12 +190,12 @@ const SignUp = () => {
               placeholder="Enter your password"
             />
             {formik.touched.password && formik.errors.password && (
-              <div className="text-red-500 mt-1">{formik.errors.password}</div>
+              <div className="error-text">{formik.errors.password}</div>
             )}
           </div>
 
           <div className="mb-4">
-            <label htmlFor="role" className="block font-bold text-white">
+            <label htmlFor="role" className="form-label">
               Role <span className="text-red-500">*</span>
             </label>
             <select
@@ -205,22 +204,22 @@ const SignUp = () => {
               value={formik.values.role}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className="w-full px-4 py-1.5 mt-1 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="input-field"
             >
               <option value="USER">User</option>
               <option value="ADMIN">Admin</option>
             </select>
             {formik.touched.role && formik.errors.role && (
-              <div className="text-red-500 mt-1">{formik.errors.role}</div>
+              <div className="error-text">{formik.errors.role}</div>
             )}
           </div>
 
           <div className="mb-4">
             <button
               type="submit"
-              className={`w-full bg-red-500 text-white py-2 rounded-md font-semibold hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
+              className={`submit-button ${
                 formik.isSubmitting || loading
-                  ? "opacity-50 cursor-not-allowed"
+                  ? "disabled-button"
                   : ""
               }`}
               disabled={formik.isSubmitting || loading}
@@ -230,9 +229,9 @@ const SignUp = () => {
           </div>
         </form>
 
-        <p className="text-center text-gray-400">
+        <p className="footer-text">
           Already have an account?{" "}
-          <a href="/login" className="text-red-500 hover:underline">
+          <a href="/login" className="link-text">
             Login
           </a>
         </p>

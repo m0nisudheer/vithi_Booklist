@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import FormTable from "../../container/form";
 import { FaBars } from "react-icons/fa";
-import { BsBook } from "react-icons/bs";
+import { IoBookSharp } from "react-icons/io5";
+import "../../../input.css"
 
 const Navbar = () => {
   const router = useRouter();
@@ -42,18 +43,18 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-gray-800 text-white p-4 shadow-lg">
+      <nav className="bg-gray-800 text-white p-2 shadow-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <BsBook size={40} className="text-red-500" />
+            <IoBookSharp size={40} className="text-red-500" />
           </div>
 
           <div className="flex-grow text-center">
-            <span className="text-xl font-bold text-red-500">
+            <span className="text-lg font-bold text-red-500">
               Welcome, {username || "Guest"}..!
             </span>
             {role && (
-              <div className="text-sm text-white">
+              <div className="text-xs text-white">
                 Logged in as{" "}
                 <strong>{role === "ADMIN" ? "Admin" : "User"}</strong>
               </div>
@@ -64,15 +65,13 @@ const Navbar = () => {
             {role === "ADMIN" && (
               <button
                 onClick={() => setIsFormOpen(true)}
-                className="bg-red-500 border border-red-800 text-white px-4 py-2 hover:bg-red-600 focus:outline-none transition-colors"
-              >
+                className="table-button" >
                 Add Book
               </button>
             )}
             <button
               onClick={handleLogout}
-              className="bg-red-500 border border-red-800 text-white px-4 py-2 hover:bg-red-600 focus:outline-none transition-colors"
-            >
+              className="table-button" >
               Logout
             </button>
           </div>
@@ -84,19 +83,18 @@ const Navbar = () => {
             </button>
 
             {isMenuOpen && (
-              <div className="absolute cursor-pointer right-0 border border-orange-300 shadow-lg mt-2 w-36 rounded-md bg-gray-800 z-10">
+              <div className="menu">
                 {role === "ADMIN" && (
                   <button
                     onClick={() => handleOptionSelect("addBook")}
-                    className="block w-full text-left bg-red-500  border border-red-800 text-white px-4 py-2 hover:bg-orange-600 rounded-t-md transition-colors"
+                    className="menu-button"
                   >
                     Add Book
                   </button>
                 )}
                 <button
                   onClick={() => handleOptionSelect("logout")}
-                  className="block w-full text-left bg-red-500 border border-red-800 text-white px-4 py-2 hover:bg-red-600 rounded-b-md transition-colors"
-                >
+                  className="menu-button" >
                   Logout
                 </button>
               </div>

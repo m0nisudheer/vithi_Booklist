@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { FaTimes } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../../../input.css"
 
 const initialValues = {
   title: "",
@@ -103,16 +104,14 @@ const FormTable = ({ onClose }) => {
         >
           <FaTimes />
         </button>
-        <h1 className="text-xl font-semibold mb-3 text-center text-red-500">
-          Book Details Form
-        </h1>
+        <h1 className="form-heading">Book Details Form</h1>
         <form
           onSubmit={formik.handleSubmit}
           autoComplete="off"
           className="space-y-4"
         >
           <div>
-            <label className="block text-sm font-bold text-white">
+            <label className="form-label">
               Book Title <span className="text-red-500">*</span>
             </label>
             <input
@@ -121,19 +120,20 @@ const FormTable = ({ onClose }) => {
               id="title"
               onChange={formik.handleChange}
               value={formik.values.title}
-              className={`mt-1 block w-full border border-gray-600 rounded-md p-1 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 ${
-                formik.touched.title && formik.errors.title
+              className={`input-field ${
+                formik.touched.password && formik.errors.password
                   ? "border-red-500"
                   : "border-gray-600"
               }`}
+               placeholder="Book Title"
             />
             {formik.touched.title && formik.errors.title && (
-              <div className="text-red-500 text-sm">{formik.errors.title}</div>
+              <div className="error-text">{formik.errors.title}</div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-white">
+            <label className="form-label">
               Book Author <span className="text-red-500">*</span>
             </label>
             <input
@@ -142,19 +142,20 @@ const FormTable = ({ onClose }) => {
               id="author"
               onChange={formik.handleChange}
               value={formik.values.author}
-              className={`mt-1 block w-full border border-gray-600 rounded-md p-1 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 ${
-                formik.touched.author && formik.errors.author
+              className={`input-field ${
+                formik.touched.password && formik.errors.password
                   ? "border-red-500"
                   : "border-gray-600"
               }`}
+               placeholder="Book Author"
             />
             {formik.touched.author && formik.errors.author && (
-              <div className="text-red-500 text-sm">{formik.errors.author}</div>
+              <div className="error-text">{formik.errors.author}</div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-white">
+            <label className="form-label">
               Publish Year <span className="text-red-500">*</span>
             </label>
             <input
@@ -163,28 +164,29 @@ const FormTable = ({ onClose }) => {
               id="year"
               onChange={formik.handleChange}
               value={formik.values.year}
-              className={`mt-1 block w-full border border-gray-600 rounded-md p-1 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 ${
-                formik.touched.year && formik.errors.year
+              className={`input-field ${
+                formik.touched.password && formik.errors.password
                   ? "border-red-500"
                   : "border-gray-600"
               }`}
+               placeholder="Publish Year"
             />
             {formik.touched.year && formik.errors.year && (
-              <div className="text-red-500 text-sm">{formik.errors.year}</div>
+              <div className="error-text">{formik.errors.year}</div>
             )}
           </div>
 
           <div className="flex justify-between gap-2">
             <button
               type="submit"
-              className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-            >
+              className="table-button"
+           >
               Add Book
             </button>
             <button
               type="button"
               onClick={() => formik.resetForm()}
-              className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+              className="table-button"
             >
               Clear
             </button>

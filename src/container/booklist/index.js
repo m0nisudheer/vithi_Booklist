@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { FaSave } from "react-icons/fa";
 import { RiEdit2Fill } from "react-icons/ri";
 import { MdDelete } from "react-icons/md";
+import "../../../input.css";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -180,7 +181,7 @@ const BookList = () => {
                                 name="title"
                                 value={editedBook.title}
                                 onChange={handleChange}
-                                className="border border-black rounded-md p-0.5 w-3/4 text-left"
+                                className="mobile-edit"
                               />
                             ) : (
                               <span className="text-lg">{book.title}</span>
@@ -196,7 +197,7 @@ const BookList = () => {
                                 name="author"
                                 value={editedBook.author}
                                 onChange={handleChange}
-                                className="border border-black rounded-md p-0.5 w-3/4 text-left"
+                                className="mobile-edit"
                               />
                             ) : (
                               <span className="text-lg">{book.author}</span>
@@ -212,7 +213,7 @@ const BookList = () => {
                                 name="year"
                                 value={editedBook.year}
                                 onChange={handleChange}
-                                className="border border-black rounded-md p-0.5 w-3/4 text-left"
+                               className="mobile-edit"
                               />
                             ) : (
                               <span className="text-lg">{book.year}</span>
@@ -234,17 +235,17 @@ const BookList = () => {
                                 {editIndex === index ? (
                                   <FaSave
                                     onClick={handleSave}
-                                    className="h-6 w-6 text-green-500 cursor-pointer"
+                                    className="icons text-green-500 "
                                   />
                                 ) : (
                                   <>
                                     <RiEdit2Fill
                                       onClick={() => handleEdit(index)}
-                                      className="h-6 w-6 font-semibold text-blue-500 cursor-pointer"
+                                      className="icons text-blue-500 "
                                     />
                                     <MdDelete
                                       onClick={() => handleRemove(index)}
-                                      className="h-6 w-6 text-red-500 cursor-pointer"
+                                      className="icons text-red-500 "
                                     />
                                   </>
                                 )}
@@ -265,20 +266,20 @@ const BookList = () => {
             <table className="min-w-full table-auto md:table-fixed">
               <thead>
                 <tr className="bg-gray-800 text-white">
-                  <th className="border-4 border-gray-300 p-2 w-3/12 text-center md:text-xl font-bold">
+                  <th className="book-list-col">
                     Book Title
                   </th>
-                  <th className="border-4  border-gray-300 p-2 w-3/12 text-center md:text-xl font-bold">
+                  <th className="book-list-col">
                     Book Author
                   </th>
-                  <th className="border-4  border-gray-300 p-2 w-2/12 text-center md:text-xl font-bold">
+                  <th className="book-list-col1">
                     Publish Year
                   </th>
-                  <th className="border-4  border-gray-300 p-2 w-2/12 text-center md:text-xl font-bold">
+                  <th className="book-list-col1">
                     Created On
                   </th>
                   {userRole === "ADMIN" && (
-                    <th className="border-4  border-gray-300 p-2 w-1/12 text-center text-base md:text-xl font-bold">
+                    <th className="book-list-col2">
                       Actions
                     </th>
                   )}
@@ -287,46 +288,46 @@ const BookList = () => {
               <tbody>
                 {books.map((book, index) => (
                   <tr key={book.id} className="border-2 border-gray-300">
-                    <td className="border-2 border-gray-300 text-center text-base md:text-xl md:p-4">
+                    <td className="larger-screens">
                       {editIndex === index ? (
                         <input
                           type="text"
                           name="title"
                           value={editedBook.title}
                           onChange={handleChange}
-                          className="border border-black rounded-md p-1 w-full text-center"
+                          className="tab-edit"
                         />
                       ) : (
                         book.title
                       )}
                     </td>
-                    <td className="border-2 border-gray-300 text-center text-base md:text-xl md:p-4">
+                    <td className="larger-screens">
                       {editIndex === index ? (
                         <input
                           type="text"
                           name="author"
                           value={editedBook.author}
                           onChange={handleChange}
-                          className="border border-black rounded-md p-1 w-full text-center"
+                          className="tab-edit"
                         />
                       ) : (
                         book.author
                       )}
                     </td>
-                    <td className="border-2 border-gray-300 text-center text-base md:text-xl md:p-4">
+                    <td className="larger-screens">
                       {editIndex === index ? (
                         <input
                           type="text"
                           name="year"
                           value={editedBook.year}
                           onChange={handleChange}
-                          className="border border-black rounded-md p-1 w-full text-center"
+                          className="tab-edit"
                         />
                       ) : (
                         book.year
                       )}
                     </td>
-                    <td className="border-2 border-gray-300 text-center text-base md:text-xl md:p-4">
+                    <td className="larger-screens">
                       {new Date(book.createdOn).toLocaleDateString()}
                     </td>
                     {userRole === "ADMIN" && (
@@ -335,17 +336,17 @@ const BookList = () => {
                           {editIndex === index ? (
                             <FaSave
                               onClick={handleSave}
-                              className="h-6 w-6 text-green-500 cursor-pointer"
+                              className="icons text-green-500 "
                             />
                           ) : (
                             <>
                               <RiEdit2Fill
                                 onClick={() => handleEdit(index)}
-                                className="h-6 w-6 font-semibold text-blue-500 cursor-pointer"
+                                className="icons text-blue-500"
                               />
                               <MdDelete
                                 onClick={() => handleRemove(index)}
-                                className="h-6 w-6 text-red-500 cursor-pointer"
+                                className="icons text-red-500"
                               />
                             </>
                           )}
