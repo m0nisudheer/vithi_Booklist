@@ -28,13 +28,16 @@ const BookList = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            query: `query GetBooks {
-              books {
-                id
-                title
-                author
-                year
-                createdOn
+            query: `query Docs {
+              listBooks {
+                docs {
+                  id
+                  title
+                  author
+                  year
+                  createdOn
+                  updatedOn
+                }
               }
             }`,
           }),
@@ -45,7 +48,7 @@ const BookList = () => {
           console.error("GraphQL Error:", data.errors[0].message);
           alert("Error fetching books: " + data.errors[0].message);
         } else {
-          setBooks(data.data.books || []);
+          setBooks(data.data.listBooks.docs || []);
         }
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -168,7 +171,7 @@ const BookList = () => {
                 {books.map((book, index) => (
                   <div
                     key={book.id}
-                    className="border border-gray-300  p-2 mb-2 rounded-lg"
+                    className="border border-gray-300 p-2 mb-2 rounded-lg"
                   >
                     <table className="w-full">
                       <tbody>
@@ -213,7 +216,7 @@ const BookList = () => {
                                 name="year"
                                 value={editedBook.year}
                                 onChange={handleChange}
-                               className="mobile-edit"
+                                className="mobile-edit"
                               />
                             ) : (
                               <span className="text-lg">{book.year}</span>
@@ -228,6 +231,14 @@ const BookList = () => {
                             </span>
                           </td>
                         </tr>
+                        <tr>
+                          <td className="font-bold">Updated On:</td>
+                          <td className="pl-8">
+                            <span className="text-lg">
+                              {new Date(book.updatedOn).toLocaleDateString()}
+                            </span>
+                          </td>
+                        </tr>
                         {userRole === "ADMIN" && (
                           <tr>
                             <td colSpan="2">
@@ -235,17 +246,17 @@ const BookList = () => {
                                 {editIndex === index ? (
                                   <FaSave
                                     onClick={handleSave}
-                                    className="icons text-green-500 "
+                                    className="icons text-green-500"
                                   />
                                 ) : (
                                   <>
                                     <RiEdit2Fill
                                       onClick={() => handleEdit(index)}
-                                      className="icons text-blue-500 "
+                                      className="icons text-blue-500"
                                     />
                                     <MdDelete
                                       onClick={() => handleRemove(index)}
-                                      className="icons text-red-500 "
+                                      className="icons text-red-500"
                                     />
                                   </>
                                 )}
@@ -266,22 +277,13 @@ const BookList = () => {
             <table className="min-w-full table-auto md:table-fixed">
               <thead>
                 <tr className="bg-gray-800 text-white">
-                  <th className="book-list-col">
-                    Book Title
-                  </th>
-                  <th className="book-list-col">
-                    Book Author
-                  </th>
-                  <th className="book-list-col1">
-                    Publish Year
-                  </th>
-                  <th className="book-list-col1">
-                    Created On
-                  </th>
+                  <th className="book-list-col">Book Title</th>
+                  <th className="book-list-col">Book Author</th>
+                  <th className="book-list-col1">Publish Year</th>
+                  <th className="book-list-col1">Created On</th>
+                  <th className="book-list-col1">Updated On</th>
                   {userRole === "ADMIN" && (
-                    <th className="book-list-col2">
-                      Actions
-                    </th>
+                    <th className="book-list-col2">Actions</th>
                   )}
                 </tr>
               </thead>
@@ -330,13 +332,16 @@ const BookList = () => {
                     <td className="larger-screens">
                       {new Date(book.createdOn).toLocaleDateString()}
                     </td>
+                    <td className="larger-screens">
+                      {new Date(book.updatedOn).toLocaleDateString()}
+                    </td>
                     {userRole === "ADMIN" && (
-                      <td className="border-2 border-gray-300 text-center text-base md:text-xl md:p-4">
+                      <td className="larger-screens">
                         <div className="flex justify-center space-x-4">
                           {editIndex === index ? (
                             <FaSave
                               onClick={handleSave}
-                              className="icons text-green-500 "
+                              className="icons text-green-500"
                             />
                           ) : (
                             <>

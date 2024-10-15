@@ -1,4 +1,3 @@
-// const mongoose = require("mongoose");
 import mercury from "@mercury-js/core";
 export const User = mercury.createModel("User", {
   userName: {

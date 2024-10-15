@@ -62,7 +62,7 @@ const resolvers = {
         return {
           msg: "User successfully logged in",
           user: user.id,
-          userName: user.userName,  // Returning username
+          userName: user.userName,  
           token: token,
           role: user.role,
         };
@@ -70,80 +70,7 @@ const resolvers = {
         console.error("Login error:", error);
         throw new GraphQLError(error.message);
       }
-    },
-
-    
-    addBook: async (root, { bookData }, { user }) => {
-      try {
-       
-        if (!user) {
-          throw new GraphQLError("Authentication required");
-        }
-
-        const bookSchema = mercury.db.Book;
-
-     
-        const newBook = await bookSchema.mongoModel.create({
-          title: bookData.title,
-          author: bookData.author,
-          year: bookData.year,
-          createdBy: user.id, 
-        });
-
-        return {
-          id: newBook.id,
-          title: newBook.title,
-          author: newBook.author,
-          year: newBook.year,
-          createdBy: user.id,
-          msg: "Book successfully created",
-        };
-      } catch (error) {
-        console.error("AddBook error:", error);
-        throw new GraphQLError(error.message);
-      }
-    },
-  },
-
-  Query: {
-   
-    books: async (root, args, ctx) => {
-      try {
-        const bookSchema = mercury.db.Book; 
-        const books = await bookSchema.mongoModel.find(); 
-        return books;
-      } catch (error) {
-        console.error("Error fetching books:", error);
-        throw new GraphQLError("Unable to fetch books: " + error.message);
-      }
-    },
-
-    
-    book: async (root, { id }, ctx) => {
-      try {
-        const bookSchema = mercury.db.Book;
-
-        const book = await bookSchema.mongoModel.findById(id).populate("createdBy", "userName");
-
-        if (!book) {
-          throw new GraphQLError("Book not found");
-        }
-
-        return {
-          id: book.id,
-          title: book.title,
-          author: book.author,
-          year: book.year,
-          createdBy: {
-            id: book.createdBy._id,
-            userName: book.createdBy.userName, 
-          },
-        };
-      } catch (error) {
-        console.error("Error fetching book:", error);
-        throw new GraphQLError("Unable to fetch book: " + error.message);
-      }
-    },
+    },  
   },
 };
 

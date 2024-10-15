@@ -9,7 +9,6 @@ export const Book = mercury.createModel(
     author: {
       type: "string",
     },
-    
     year: {
       type: "string",
     },

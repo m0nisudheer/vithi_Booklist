@@ -102,7 +102,7 @@ const SignUp = () => {
               className: "border border-red-500",
             });
           }
-          formik.resetForm();
+          // formik.resetForm();
         }
       } catch (error) {
         toast.error("Network error: " + error.message, {
@@ -204,7 +204,7 @@ const SignUp = () => {
               value={formik.values.role}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className="input-field"
+              className="input-field border-none"
             >
               <option value="USER">User</option>
               <option value="ADMIN">Admin</option>
